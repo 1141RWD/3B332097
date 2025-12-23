@@ -15,6 +15,7 @@
 
             /* 導覽列 */
             .navbar {
+                position: relative; /* 讓 nav 用它當定位基準 */
                 display: flex;
                 justify-content: space-between;
                 padding: 15px 40px;
@@ -106,6 +107,10 @@
                 font-size: 26px;
                 cursor: pointer;
             }
+            nav {
+                display: flex;
+                align-items: center;
+            }
 
             /* RWD平板 */
             @media (max-width: 1023px) {
@@ -128,6 +133,7 @@
 
             /* RWD手機 */
             @media (max-width: 767px) {
+                /* gpt1 */
                 /* 導覽列改直向 */
                 /* .navbar {
                     flex-direction: column;
@@ -205,19 +211,20 @@
                     display: flex;
                 } */
 
-                .navbar {
+                /* gpt2 */
+                /* .navbar {
                     flex-direction: row;
                     justify-content: space-between;
-                }
+                } */
 
                 /* 手機才顯示漢堡 */
-                .menu-toggle {
+                /* .menu-toggle {
                     display: block;
                     color: white;
-                }
+                } */
 
                 /* 導覽選單預設隱藏 */
-                nav {
+                /* nav {
                     display: none;
                     width: 100%;
                     background: #111;
@@ -233,7 +240,56 @@
 
                 nav.active {
                     display: flex;
-                }
+                } */
+
+                /* gpt3 */
+                .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 2000;
+    }
+
+    /* 漢堡 */
+    .menu-toggle {
+        display: block;
+        font-size: 26px;
+        color: white;
+        cursor: pointer;
+    }
+
+    /* 下拉選單（浮層） */
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #111;
+        display: flex;
+        flex-direction: column;
+
+        /* 預設隱藏 */
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+
+        transition: all 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    nav a {
+        padding: 15px 0;
+        text-align: center;
+        border-top: 1px solid #333;
+    }
+
+    /* 展開狀態 */
+    nav.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
             }
         </style>
     </head>
