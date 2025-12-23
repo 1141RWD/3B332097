@@ -101,6 +101,12 @@
                 color: #fff;
             }
 
+            .menu-toggle {  /*隱藏漢堡選單*/
+                display: none;
+                font-size: 26px;
+                cursor: pointer;
+            }
+
             /* RWD平板 */
             @media (max-width: 1023px) {
                 .navbar {
@@ -123,22 +129,22 @@
             /* RWD手機 */
             @media (max-width: 767px) {
                 /* 導覽列改直向 */
-                .navbar {
+                /* .navbar {
                     flex-direction: column;
                     align-items: center;
-                }
+                } */
 
-                .navbar nav {
+                /* .navbar nav {
                     margin-top: 10px;
                 }
 
                 .navbar a {
                     display: block;
                     margin: 10px 0;
-                }
+                } */
 
-                /* Banner */
-                .banner {
+                 /* Banner  */
+                /* .banner {
                     padding: 40px 15px;
                 }
 
@@ -153,31 +159,58 @@
                 .banner button {
                     width: 100%;
                     max-width: 300px;
-                }
+                } */
 
                 /* 商品一排一個 */
-                .product-grid {
+                /* .product-grid {
                     grid-template-columns: 1fr;
                 }
 
                 .products {
                     padding: 40px 20px;
-                }
+                } */
 
                 /* 漢堡選單 */
 
-                .menu-toggle {
+                
+
+                /* .navbar {
+                    flex-direction: row;
+                    justify-content: space-between;
+                } */
+
+                /* 顯示漢堡 */
+                /* .menu-toggle {
+                    display: block;
+                    color: white;
+                } */
+
+                /* 導覽選單預設隱藏 */
+                /* nav {
                     display: none;
-                    font-size: 26px;
-                    cursor: pointer;
-                }
+                    width: 100%;
+                    background: #111;
+                    flex-direction: column;
+                    margin-top: 10px;
+                } */
+
+                /* nav a {
+                    padding: 12px;
+                    border-top: 1px solid #333;
+                    text-align: center;
+                } */
+
+                /* 打開狀態 */
+                /* nav.active {
+                    display: flex;
+                } */
 
                 .navbar {
                     flex-direction: row;
                     justify-content: space-between;
                 }
 
-                /* 顯示漢堡 */
+                /* 手機才顯示漢堡 */
                 .menu-toggle {
                     display: block;
                     color: white;
@@ -198,7 +231,6 @@
                     text-align: center;
                 }
 
-                /* 打開狀態 */
                 nav.active {
                     display: flex;
                 }
