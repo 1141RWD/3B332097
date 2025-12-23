@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>TechNova｜智慧 3C 選物店</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: Arial, sans-serif;
+            }
+
+            /* 導覽列 */
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                padding: 15px 40px;
+                background: #111;
+                color: #fff;
+            }
+
+            .navbar a {
+                color: #fff;
+                margin-left: 20px;
+                text-decoration: none;
+            }
+
+            .logo {
+                font-size: 22px;
+                font-weight: bold;
+            }
+
+            /* Banner */
+            .banner {
+                background: linear-gradient(to right, #1e3c72, #2a5298);
+                color: white;
+                text-align: center;
+                padding: 80px 20px;
+            }
+
+            .banner button {
+                margin-top: 20px;
+                padding: 10px 25px;
+                border: none;
+                background: #00e5ff;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            /* 商品區 */
+            .products {
+                padding: 60px 40px;
+                background: #f5f5f5;
+            }
+
+            .products h2 {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            .product-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 30px;
+            }
+
+            .product-card {
+                background: #fff;
+                padding: 20px;
+                text-align: center;
+                border-radius: 10px;
+                transition: 0.3s;
+            }
+
+            .product-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            }
+
+            .product-card img {
+                width: 100%;
+            }
+
+            .product-card button {
+                margin-top: 10px;
+                padding: 8px 20px;
+                border: none;
+                background: #1e88e5;
+                color: white;
+                cursor: pointer;
+            }
+
+            /* 頁尾 */
+            footer {
+                text-align: center;
+                padding: 15px;
+                background: #111;
+                color: #fff;
+            }
+
+            /* RWD平板 */
+            @media (max-width: 1023px) {
+                .navbar {
+                    padding: 15px 20px;
+                }
+
+                .product-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .banner {
+                    padding: 60px 20px;
+                }
+
+                .banner h1 {
+                    font-size: 28px;
+                }
+            }
+
+            /* RWD手機 */
+            @media (max-width: 767px) {
+                /* 導覽列改直向 */
+                .navbar {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .navbar nav {
+                    margin-top: 10px;
+                }
+
+                .navbar a {
+                    display: block;
+                    margin: 10px 0;
+                }
+
+                /* Banner */
+                .banner {
+                    padding: 40px 15px;
+                }
+
+                .banner h1 {
+                    font-size: 24px;
+                }
+
+                .banner p {
+                    font-size: 14px;
+                }
+
+                .banner button {
+                    width: 100%;
+                    max-width: 300px;
+                }
+
+                /* 商品一排一個 */
+                .product-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .products {
+                    padding: 40px 20px;
+                }
+
+                /* 漢堡選單 */
+
+                .menu-toggle {
+                    display: none;
+                    font-size: 26px;
+                    cursor: pointer;
+                }
+
+                .navbar {
+                    flex-direction: row;
+                    justify-content: space-between;
+                }
+
+                /* 顯示漢堡 */
+                .menu-toggle {
+                    display: block;
+                    color: white;
+                }
+
+                /* 導覽選單預設隱藏 */
+                nav {
+                    display: none;
+                    width: 100%;
+                    background: #111;
+                    flex-direction: column;
+                    margin-top: 10px;
+                }
+
+                nav a {
+                    padding: 12px;
+                    border-top: 1px solid #333;
+                    text-align: center;
+                }
+
+                /* 打開狀態 */
+                nav.active {
+                    display: flex;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 導覽列 -->
+        <header class="navbar">
+            <div class="logo">TechNova</div>
+
+            <!-- 漢堡按鈕 -->
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+            <!-- 導覽選單 -->
+            <nav id="navMenu">
+                <a href="#">首頁</a>
+                <a href="#">商品</a>
+                <a href="#">關於我們</a>
+                <a href="#">聯絡我們</a>
+                <a href="#">登入</a>
+                <a href="#" class="cart">🛒 <span id="cartCount">0</span></a>
+            </nav>
+        </header>
+
+        <!-- 主視覺 Banner -->
+        <section class="banner">
+            <h1>打造你的智慧科技生活</h1>
+            <p>精選高 CP 值 3C 周邊商品</p>
+            <button>立即選購</button>
+        </section>
+
+        <!-- 熱門商品 -->
+        <section class="products">
+            <h2>熱門商品</h2>
+
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="">
+                    <h3>無線藍牙耳機</h3>
+                    <p>$1,990</p>
+                    <button onclick="addToCart()">加入購物車</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="">
+                    <h3>機械式鍵盤</h3>
+                    <p>$2,490</p>
+                    <button onclick="addToCart()">加入購物車</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="">
+                    <h3>快充行動電源</h3>
+                    <p>$1,290</p>
+                    <button onclick="addToCart()">加入購物車</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200" alt="">
+                    <h3>無線滑鼠</h3>
+                    <p>$890</p>
+                    <button onclick="addToCart()">加入購物車</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 頁尾 -->
+        <footer>
+            © 2025 TechNova 智慧 3C 選物店
+        </footer>
+
+        <script>
+            let count = 0;
+
+            function addToCart() {
+                count++;
+                document.getElementById("cartCount").innerText = count;
+                alert("已加入購物車！");
+            }
+
+            // 漢堡選單
+            function toggleMenu() {
+                const menu = document.getElementById("navMenu");
+                menu.classList.toggle("active");
+            }
+        </script>
+    </body>
+</html>
