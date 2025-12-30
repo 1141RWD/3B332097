@@ -4,16 +4,163 @@
         <meta charset="UTF-8">
         <title>TechNova｜智慧 3C 選物店</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- <link rel="stylesheet" href="style.css"> -->
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        
+        <!-- 導覽列 -->
+        <header class="navbar">
+            <div class="logo">TechNova</div>
+
+            <div class="right-section">
+                <!-- 導覽選單 -->
+                <nav id="navMenu">
+                    <a href="index.html">首頁</a>
+                    <a href="products.html">商品</a>
+                    <a href="download.html">下載</a>
+                    <a href="login.html">登入</a>
+                </nav>
+
+                <!-- 右側功能區 -->
+                <div class="nav-actions">
+                    <!-- 購物車 -->
+                    <a href="shopping.html" class="cart-icon">
+                        🛒 <span id="cartCount">0</span>
+                    </a>
+
+                    <!-- 漢堡按鈕 -->
+                    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主視覺 -->
+        <section class="banner">
+            <div class="carousel">
+                <div class="slide active">
+                    <img src="介紹圖/ROG Phone 9 Pro介紹圖.jpg" alt="ROG Phone 9 Pro">
+                </div>
+                <div class="slide">
+                    <img src="介紹圖/ROG Cetra True Wireless 無線藍牙耳機介紹圖.jpg" alt="ROG Cetra True Wireless 無線藍牙耳機介紹圖">
+                </div>
+                <div class="slide">
+                    <img src="介紹圖/ROG Pelta 無線電競耳機介紹圖.jpg" alt="ROG Pelta 無線電競耳機介紹圖">
+                </div>
+                <button class="prev" onclick="prevSlide()">&#10094;</button>
+                <button class="next" onclick="nextSlide()">&#10095;</button>
+                <div class="indicators">
+                    <span class="dot active" onclick="showSlide(0)"></span>
+                    <span class="dot" onclick="showSlide(1)"></span>
+                    <span class="dot" onclick="showSlide(2)"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 熱門商品 -->
+        <section class="products">
+            <h2>熱門商品</h2>
+            <div class="product-grid">
+                <div class="product-card" onclick="goDetail('nb02')">
+                    <img src="ProductImages/ROG Strix SCAR 16 (2025) G635.webp" alt="ROG Strix SCAR 16 (2025) G635">
+                    <h3>ROG Strix SCAR 16 (2025) G635</h3>
+                    <p>$77999</p>
+                    <button class="add-to-cart-btn" onclick="addToCart(event, 'nb02')">加入購物車</button>
+                </div>
+
+                <div class="product-card" onclick="goDetail('kb02')">
+                    <img src="ProductImages/ROG Falchion Ace HFX 磁軸電競鍵盤.webp" alt="ROG Falchion Ace HFX 磁軸電競鍵盤">
+                    <h3>ROG Falchion Ace HFX 磁軸電競鍵盤</h3>
+                    <p>$6490</p>
+                    <button class="add-to-cart-btn" onclick="addToCart(event, 'kb02')">加入購物車</button>
+                </div>
+
+                <div class="product-card" onclick="goDetail('mouse02')">
+                    <img src="ProductImages/ROG Spatha X 無線滑鼠.webp" alt="ROG Spatha X 無線滑鼠">
+                    <h3>ROG Spatha X 無線滑鼠</h3>
+                    <p>$3990</p>
+                    <button class="add-to-cart-btn" onclick="addToCart(event, 'mouse02')">加入購物車</button>
+                </div>
+
+                <div class="product-card" onclick="goDetail('ear03')">
+                    <img src="ProductImages/ROG Cetra True Wireless 無線藍牙耳機.webp" alt="ROG Cetra True Wireless 無線藍牙耳機">
+                    <h3>ROG Cetra True Wireless 無線藍牙耳機</h3>
+                    <p>$4590</p>
+                    <button class="add-to-cart-btn" onclick="addToCart(event, 'ear03')">加入購物車</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 頁尾 -->
+        <footer>
+            © 2025 TechNova 智慧 3C 選物店
+        </footer>
+
+        <script>
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById("cartCount").innerText = count;
+
+            function addToCart(event, id) {
+                event.stopPropagation();
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                let item = cart.find(i => i.id === id);
+                if (item) {
+                    item.quantity++;
+                } else {
+                    cart.push({id: id, quantity: 1});
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                count = cart.reduce((sum, item) => sum + item.quantity, 0);
+                document.getElementById("cartCount").innerText = count;
+                alert("已加入購物車！");
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+                const cartCountEl = document.getElementById("cartCount");
+                if (cartCountEl) {
+                    cartCountEl.innerText = count;
+                }
+            });
+
+            // 漢堡選單
+            function toggleMenu() {
+                const menu = document.getElementById("navMenu");
+                menu.classList.toggle("active");
+            }
+
+            function goDetail(id) {
+                location.href = `product.html?id=${id}`;
+            }
+
+            // 輪播
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                currentSlide = index;
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            // 自動輪播
+            setInterval(nextSlide, 5000);
+            showSlide(currentSlide);
+        </script>
     </body>
 </html>
-
