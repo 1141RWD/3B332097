@@ -1,118 +1,129 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
-<meta charset="UTF-8">
-<title>商品詳細｜TechNova</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>商品詳細｜TechNova</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!-- 導覽列 -->
+        <header class="navbar">
+            <div class="logo">TechNova</div>
 
-<body>
-    <!-- 導覽列 -->
-    <header class="navbar">
-        <div class="logo">TechNova</div>
+            <div class="right-section">
+                <!-- 導覽選單 -->
+                <nav id="navMenu">
+                    <a href="index.html">首頁</a>
+                    <a href="products.html">商品</a>
+                    <a href="download.html">下載</a>
+                    <a href="login.html">登入</a>
+                </nav>
 
-        <div class="right-section">
-            <!-- 導覽選單 -->
-            <nav id="navMenu">
-                <a href="index.html">首頁</a>
-                <a href="products.html">商品</a>
-                <a href="download.html">下載</a>
-                <a href="login.html">登入</a>
-            </nav>
+                <!-- 右側功能區 -->
+                <div class="nav-actions">
+                    <!-- 購物車 -->
+                    <a href="shopping.html" class="cart-icon">
+                        🛒 <span id="cartCount">0</span>
+                    </a>
 
-            <!-- 右側功能區 -->
-            <div class="nav-actions">
-                <!-- 購物車 -->
-                <a href="shopping.html" class="cart-icon">
-                    🛒 <span id="cartCount">0</span>
-                </a>
-
-                <!-- 漢堡按鈕 -->
-                <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+                    <!-- 漢堡按鈕 -->
+                    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- 商品詳細區 -->
-    <section class="products">
-        <h2>商品詳細</h2>
+        <!-- 商品詳細區 -->
+        <section class="products">
+            <h2>商品詳細</h2>
 
-        <div class="product-detail" id="detail">
-            <div id="productImgContainer">
-                <img id="productImg" src="" alt="產品圖片">
+            <div class="product-detail" id="detail">
+                <div id="productImgContainer">
+                    <img id="productImg" src="" alt="產品圖片">
+                </div>
+                <div id="productInfo">
+                    <h2 id="productName"></h2>
+                    <p id="productDesc"></p>
+                    <h3 id="productPrice"></h3>
+                    <div id="specArea"></div>
+                    <button class="add-to-cart-btn" onclick="addToCart()">加入購物車</button>
+                </div>
             </div>
-            <div id="productInfo">
-                <h2 id="productName"></h2>
-                <p id="productDesc"></p>
-                <h3 id="productPrice"></h3>
-                <div id="specArea"></div>
-                <button class="add-to-cart-btn" onclick="addToCart()">加入購物車</button>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 頁尾 -->
-    <footer>
-        © 2025 TechNova 智慧 3C 選物店
-    </footer>
+        <!-- 頁尾 -->
+        <footer>
+            © 2025 TechNova 智慧 3C 選物店
+        </footer>
 
-    <script src="products.js"></script>
-    <script>
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let count = cart.reduce((sum, item) => sum + item.quantity, 0);
-        document.getElementById("cartCount").innerText = count;
+        <script src="products.js"></script>
+        <script>
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById("cartCount").innerText = count;
 
-        const params = new URLSearchParams(location.search);
-        const productId = params.get("id");
-        const product = products.find(p => p.id === productId);
+            const params = new URLSearchParams(location.search);
+            const productId = params.get("id");
+            const product = products.find(p => p.id === productId);
 
-        if (product) {
-            let currentSpecIndex = 0;
-            let currentSpec = product.specs[0];
+            if (product) {
+                let currentSpecIndex = 0;
+                let currentSpec = product.specs[0];
 
-            document.getElementById("productName").innerText = product.name;
-            document.getElementById("productImg").src = currentSpec.img;
-            document.getElementById("productDesc").innerText = currentSpec.desc;
-            document.getElementById("productPrice").innerText = "$" + currentSpec.price;
+                document.getElementById("productName").innerText = product.name;
+                document.getElementById("productImg").src = currentSpec.img;
+                document.getElementById("productDesc").innerText = currentSpec.desc;
+                document.getElementById("productPrice").innerText = "$" + currentSpec.price;
 
-            const specArea = document.getElementById("specArea");
-            product.specs.forEach((spec, index) => {
-                const btn = document.createElement("button");
-                btn.innerText = spec.label;
-                btn.onclick = () => {
-                    currentSpecIndex = index;
-                    currentSpec = spec;
-                    document.getElementById("productImg").src = spec.img;
-                    document.getElementById("productDesc").innerText = spec.desc;
-                    document.getElementById("productPrice").innerText = "$" + spec.price;
-                };
-                specArea.appendChild(btn);
-            });
+                const specArea = document.getElementById("specArea");
+                product.specs.forEach((spec, index) => {
+                    const btn = document.createElement("button");
+                    btn.innerText = spec.label;
+                    btn.onclick = () => {
+                        currentSpecIndex = index;
+                        currentSpec = spec;
+                        document.getElementById("productImg").src = spec.img;
+                        document.getElementById("productDesc").innerText = spec.desc;
+                        document.getElementById("productPrice").innerText = "$" + spec.price;
+                    };
+                    specArea.appendChild(btn);
+                });
 
-            window.addToCart = function() { 
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                
-                let item = cart.find(i => i.id === productId && i.specIndex === currentSpecIndex);
-                
-                if (item) {
-                    item.quantity++;
-                } else {
-                    cart.push({id: productId, specIndex: currentSpecIndex, quantity: 1});
+                window.addToCart = function() { 
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    
+                    let item = cart.find(i => i.id === productId && i.specIndex === currentSpecIndex);
+                    
+                    if (item) {
+                        item.quantity++;
+                    } else {
+                        cart.push({id: productId, specIndex: currentSpecIndex, quantity: 1});
+                    }
+                    
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    count = cart.reduce((sum, item) => sum + item.quantity, 0);
+                    document.getElementById("cartCount").innerText = count;
+                    alert("已加入購物車！");
                 }
-                
-                localStorage.setItem('cart', JSON.stringify(cart));
-                count = cart.reduce((sum, item) => sum + item.quantity, 0);
-                document.getElementById("cartCount").innerText = count;
-                alert("已加入購物車！");
             }
-        }
 
-        // 漢堡選單
-        function toggleMenu() {
-            const menu = document.getElementById("navMenu");
-            menu.classList.toggle("active");
-        }
-    </script>
-</body>
+            // 漢堡選單
+            function toggleMenu() {
+                const menu = document.getElementById("navMenu");
+                menu.classList.toggle("active");
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                    const user = JSON.parse(localStorage.getItem('currentUser'));
+                    const navMenu = document.getElementById("navMenu");
+                    
+                    const loginLink = navMenu.querySelector('a[href="login.html"]');
+                    
+                    if (user && loginLink) {
+                        loginLink.innerText = "會員中心";
+                        loginLink.href = "profile.html"; // 指向新的詳細資料頁
+                    }
+                });
+        </script>
+    </body>
 </html>
