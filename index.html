@@ -161,6 +161,18 @@
             // 自動輪播
             setInterval(nextSlide, 5000);
             showSlide(currentSlide);
+
+            document.addEventListener("DOMContentLoaded", function() {
+                const user = JSON.parse(localStorage.getItem('currentUser'));
+                const navMenu = document.getElementById("navMenu");
+                
+                const loginLink = navMenu.querySelector('a[href="login.html"]');
+                
+                if (user && loginLink) {
+                    loginLink.innerText = "會員中心";
+                    loginLink.href = "profile.html"; // 指向新的詳細資料頁
+                }
+            });
         </script>
     </body>
 </html>
