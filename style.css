@@ -666,3 +666,99 @@ nav {
         font-size: 12px;
     }
 }
+/* 商品卡片懸浮：增加抬升感與陰影 */
+.product-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+.product-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 30px rgba(0, 229, 255, 0.2);
+    border-color: #00e5ff;
+}
+/* 按鈕流光效果 */
+.add-to-cart-btn, .checkout-btn, .download-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+.add-to-cart-btn:hover {
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px #00e5ff;
+}
+/* 圖片縮放效果 */
+.product-card img {
+    transition: transform 0.5s ease;
+}
+.product-card:hover img {
+    transform: scale(1.08);
+}
+/* --- 頁尾 Footer 樣式 --- */
+footer {
+    background: #0a0a0a;
+    color: #fff;
+    padding: 60px 40px 20px;
+    border-top: 1px solid #333;
+    margin-top: 50px;
+}
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+.footer-section h3 {
+    color: #00e5ff;
+    margin-bottom: 20px;
+    font-size: 18px;
+    position: relative;
+}
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 30px;
+    height: 2px;
+    background: #00e5ff;
+}
+.footer-section ul {
+    list-style: none;
+}
+.footer-section ul li {
+    margin-bottom: 12px;
+}
+.footer-section ul li a {
+    color: #aaa;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 14px;
+}
+.footer-section ul li a:hover {
+    color: #fff;
+    padding-left: 5px;
+}
+.footer-bottom {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #222;
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+}
+/* RWD 手機版調整 */
+@media (max-width: 767px) {
+    footer {
+        padding: 40px 20px 20px;
+    }
+    .footer-container {
+        text-align: center;
+    }
+    .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
