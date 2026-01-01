@@ -1,299 +1,328 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <title>購物車｜TechNova</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .cart-item {
-            display: flex;
-            align-items: center;
-            background: #1a1a1a;
-            color: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            border: 1px solid #333;
-            flex-wrap: wrap;
-        }
-        .cart-item img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .item-info {
-            flex: 1;
-            margin-left: 20px;
-        }
-        .item-info h3 {
-            margin-bottom: 5px;
-            color: #fff;
-        }
-        .item-info p {
-            color: #aaa;
-            font-size: 14px;
-        }
-        .item-spec {
-            display: inline-block;
-            background: #333;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-        .quantity-control {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin: 0 30px;
-        }
-        .cart-btn {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 5px 12px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .cart-btn:hover {
-            background: #ff4d4d;
-        }
-        .price-info {
-            text-align: right;
-            min-width: 120px;
-        }
-        .remove-link {
-            color: #ff4d4d;
-            text-decoration: none;
-            font-size: 13px;
-            cursor: pointer;
-            display: block;
-            margin-top: 10px;
-        }
-        .cart-summary {
-            background: #1a1a1a;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: right;
-            margin-top: 30px;
-            border-top: 2px solid #ff4d4d;
-            color:#fff;
-        }
-        .cart-summary h3 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .checkout-btn {
-            background: #ff4d4d;
-            color: white;
-            border: none;
-            padding: 12px 40px;
-            font-size: 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        /* 手機版RWD */
-        @media (max-width: 768px) {
+    <head>
+        <meta charset="UTF-8">
+        <title>購物車｜TechNova</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <style>
             .cart-item {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 15px;
+                display: flex;
+                align-items: center;
+                background: #1a1a1a;
+                color: white;
+                padding: 20px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+                border: 1px solid #333;
+                flex-wrap: wrap;
             }
-
             .cart-item img {
-                width: 100%;
-                height: 200px;
-                margin-bottom: 15px;
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 8px;
             }
-
             .item-info {
-                margin-left: 0;
-                margin-bottom: 15px;
-                width: 100%;
+                flex: 1;
+                margin-left: 20px;
             }
-
+            .item-info h3 {
+                margin-bottom: 5px;
+                color: #fff;
+            }
+            .item-info p {
+                color: #aaa;
+                font-size: 14px;
+            }
+            .item-spec {
+                display: inline-block;
+                background: #333;
+                padding: 2px 8px;
+                border-radius: 4px;
+                font-size: 12px;
+                margin-top: 5px;
+            }
             .quantity-control {
-                margin: 10px 0;
-                width: 100%;
-                justify-content: flex-start;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin: 0 30px;
             }
-
+            .cart-btn {
+                background: #333;
+                color: white;
+                border: none;
+                padding: 5px 12px;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: 0.3s;
+            }
+            .cart-btn:hover {
+                background: #ff4d4d;
+            }
             .price-info {
-                text-align: left;
-                width: 100%;
-                border-top: 1px solid #333;
-                padding-top: 10px;
+                text-align: right;
+                min-width: 120px;
+            }
+            .remove-link {
+                color: #ff4d4d;
+                text-decoration: none;
+                font-size: 13px;
+                cursor: pointer;
+                display: block;
                 margin-top: 10px;
             }
-
             .cart-summary {
-                max-width: 100%;
-                margin-top: 20px;
+                background: #1a1a1a;
+                padding: 25px;
+                border-radius: 12px;
+                text-align: right;
+                margin-top: 30px;
+                border-top: 2px solid #ff4d4d;
+                color:#fff;
             }
-
-            .total-amount {
-                font-size: 26px;
+            .cart-summary h3 {
+                font-size: 24px;
+                margin-bottom: 20px;
             }
-        }
-    </style>
-</head>
-
-<body>
-    <header class="navbar">
-        <div class="logo">TechNova</div>
-        <div class="right-section">
-            <nav id="navMenu">
-                <a href="index.html">首頁</a>
-                <a href="products.html">商品</a>
-                <a href="#">關於我們</a>
-                <a href="#">聯絡我們</a>
-            </nav>
-            <div class="nav-actions">
-                <a href="shopping.html" class="cart-icon">
-                    🛒 <span id="cartCount">0</span>
-                </a>
-                <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-            </div>
-        </div>
-    </header>
-
-    <section class="products" style="max-width: 1000px; margin: 0 auto; padding: 40px 20px;">
-        <h2 style="margin-bottom: 30px;">您的購物車</h2>
-
-        <div id="cartContainer">
-            </div>
-
-        <div class="cart-summary" id="cartSummary" style="display: none;">
-            <h3>總計金額： $<span id="totalPrice">0</span></h3>
-            <button class="cart-btn" onclick="clearCart()" style="margin-right: 10px; background: #444;">清空購物車</button>
-            <button class="checkout-btn" onclick="checkout()">前往結帳</button>
-        </div>
-    </section>
-
-    <script src="products.js"></script>
-    <script>
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-        function renderCart() {
-            const container = document.getElementById("cartContainer");
-            const summary = document.getElementById("cartSummary");
-            container.innerHTML = "";
-
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div style="text-align:center; padding: 50px;">
-                        <p style="font-size: 20px; color: #888;">購物車內目前沒有商品</p>
-                        <a href="products.html" class="cart-btn" style="display:inline-block; margin-top:20px; text-decoration:none;">去逛逛吧</a>
-                    </div>`;
-                summary.style.display = "none";
-                updateBadge();
-                return;
+            .checkout-btn {
+                background: #ff4d4d;
+                color: white;
+                border: none;
+                padding: 12px 40px;
+                font-size: 18px;
+                border-radius: 30px;
+                cursor: pointer;
+                font-weight: bold;
             }
-
-            summary.style.display = "block";
-            let total = 0;
-
-            cart.forEach((item, index) => {
-                const product = products.find(p => p.id === item.id);
-                if (product) {
-                    const spec = product.specs[item.specIndex || 0];
-                    const subtotal = spec.price * item.quantity;
-                    total += subtotal;
-
-                    container.innerHTML += `
-                        <div class="cart-item">
-                            <img src="${spec.img}" alt="${product.name}">
-                            <div class="item-info">
-                                <h3>${product.name}</h3>
-                                <div class="item-spec">規格：${spec.label}</div>
-                                <p style="margin-top:10px;">單價：$${spec.price}</p>
-                            </div>
-                            <div class="quantity-control">
-                                <button class="cart-btn" onclick="changeQuantity(${index}, -1)">-</button>
-                                <span>${item.quantity}</span>
-                                <button class="cart-btn" onclick="changeQuantity(${index}, 1)">+</button>
-                            </div>
-                            <div class="price-info">
-                                <p style="font-size: 18px; font-weight: bold;">$${subtotal}</p>
-                                <span class="remove-link" onclick="removeItem(${index})">移除項目</span>
-                            </div>
-                        </div>
-                    `;
+            /* 手機版RWD */
+            @media (max-width: 768px) {
+                .cart-item {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    padding: 15px;
                 }
-            });
 
-            document.getElementById("totalPrice").innerText = total.toLocaleString();
-            updateBadge();
-        }
+                .cart-item img {
+                    width: 100%;
+                    height: 200px;
+                    margin-bottom: 15px;
+                }
 
-        function changeQuantity(index, delta) {
-            cart[index].quantity += delta;
-            if (cart[index].quantity <= 0) {
-                removeItem(index);
-            } else {
-                saveAndUpdate();
+                .item-info {
+                    margin-left: 0;
+                    margin-bottom: 15px;
+                    width: 100%;
+                }
+
+                .quantity-control {
+                    margin: 10px 0;
+                    width: 100%;
+                    justify-content: flex-start;
+                }
+
+                .price-info {
+                    text-align: left;
+                    width: 100%;
+                    border-top: 1px solid #333;
+                    padding-top: 10px;
+                    margin-top: 10px;
+                }
+
+                .cart-summary {
+                    max-width: 100%;
+                    margin-top: 20px;
+                }
+
+                .total-amount {
+                    font-size: 26px;
+                }
             }
-        }
+        </style>
+    </head>
+    <body>
+        <header class="navbar">
+            <div class="logo">TechNova</div>
+            <div class="right-section">
+                <nav id="navMenu">
+                    <a href="index.html">首頁</a>
+                    <a href="products.html">商品</a>
+                    <a href="download.html">下載</a>
+                    <a href="login.html">登入</a>
+                </nav>
+                <div class="nav-actions">
+                    <a href="shopping.html" class="cart-icon">
+                        🛒 <span id="cartCount">0</span>
+                    </a>
+                    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+                </div>
+            </div>
+        </header>
 
-        function removeItem(index) {
-            if(confirm("確定要移除這項商品嗎？")) {
-                cart.splice(index, 1);
-                saveAndUpdate();
+        <section class="products" style="max-width: 1000px; margin: 0 auto; padding: 40px 20px;">
+            <h2 style="margin-bottom: 30px;">您的購物車</h2>
+
+            <div id="cartContainer">
+                </div>
+
+            <div class="cart-summary" id="cartSummary" style="display: none;">
+                <h3>總計金額： $<span id="totalPrice">0</span></h3>
+                <button class="cart-btn" onclick="clearCart()" style="margin-right: 10px; background: #444;">清空購物車</button>
+                <button class="checkout-btn" onclick="checkout()">前往結帳</button>
+            </div>
+        </section>
+
+        <script src="products.js"></script>
+        <script>
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            function renderCart() {
+                const container = document.getElementById("cartContainer");
+                const summary = document.getElementById("cartSummary");
+                container.innerHTML = "";
+
+                if (cart.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align:center; padding: 50px;">
+                            <p style="font-size: 20px; color: #888;">購物車內目前沒有商品</p>
+                            <a href="products.html" class="cart-btn" style="display:inline-block; margin-top:20px; text-decoration:none;">去逛逛吧</a>
+                        </div>`;
+                    summary.style.display = "none";
+                    updateBadge();
+                    return;
+                }
+
+                summary.style.display = "block";
+                let total = 0;
+
+                cart.forEach((item, index) => {
+                    const product = products.find(p => p.id === item.id);
+                    if (product) {
+                        const spec = product.specs[item.specIndex || 0];
+                        const subtotal = spec.price * item.quantity;
+                        total += subtotal;
+
+                        container.innerHTML += `
+                            <div class="cart-item">
+                                <img src="${spec.img}" alt="${product.name}">
+                                <div class="item-info">
+                                    <h3>${product.name}</h3>
+                                    <div class="item-spec">規格：${spec.label}</div>
+                                    <p style="margin-top:10px;">單價：$${spec.price}</p>
+                                </div>
+                                <div class="quantity-control">
+                                    <button class="cart-btn" onclick="changeQuantity(${index}, -1)">-</button>
+                                    <span>${item.quantity}</span>
+                                    <button class="cart-btn" onclick="changeQuantity(${index}, 1)">+</button>
+                                </div>
+                                <div class="price-info">
+                                    <p style="font-size: 18px; font-weight: bold;">$${subtotal}</p>
+                                    <span class="remove-link" onclick="removeItem(${index})">移除項目</span>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                document.getElementById("totalPrice").innerText = total.toLocaleString();
+                updateBadge();
             }
-        }
 
-        function clearCart() {
-            if(confirm("確定要清空整個購物車嗎？")) {
-                cart = [];
-                saveAndUpdate();
+            function changeQuantity(index, delta) {
+                cart[index].quantity += delta;
+                if (cart[index].quantity <= 0) {
+                    removeItem(index);
+                } else {
+                    saveAndUpdate();
+                }
             }
-        }
 
-        function saveAndUpdate() {
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCart();
-        }
+            function removeItem(index) {
+                if(confirm("確定要移除這項商品嗎？")) {
+                    cart.splice(index, 1);
+                    saveAndUpdate();
+                }
+            }
 
-        function updateBadge() {
-            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById("cartCount").innerText = count;
-        }
-        
-        function checkout() {
-            if (cart.length === 0) return;
+            function clearCart() {
+                if(confirm("確定要清空整個購物車嗎？")) {
+                    cart = [];
+                    saveAndUpdate();
+                }
+            }
 
-            const btn = document.querySelector(".checkout-btn");
-            const originalText = btn.innerText;
-
-            // 模擬網路傳輸狀態
-            btn.innerText = "處理中...";
-            btn.style.opacity = "0.7";
-            btn.disabled = true;
-
-            setTimeout(() => {
-                alert("✅ 訂單已完成！\n商品將於 24 小時內為您出貨。");
-
-                // 歸零並清空
-                cart = [];
+            function saveAndUpdate() {
                 localStorage.setItem('cart', JSON.stringify(cart));
                 renderCart();
-                const countEl = document.getElementById("cartCount");
-                if (countEl) countEl.innerText = "0";
-                btn.innerText = originalText;
-                btn.style.opacity = "1";
-                btn.disabled = false;
-            }, 1500); // 模擬 1.5 秒的結帳過程
-        }
+            }
 
-        function toggleMenu() {
-            const menu = document.getElementById("navMenu");
-            menu.classList.toggle("active");
-        }
-        renderCart();
-    </script>
-</body>
+            function updateBadge() {
+                const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+                document.getElementById("cartCount").innerText = count;
+            }
+            
+            function checkout() {
+                // 1. 檢查購物車是否有東西
+                if (cart.length === 0) {
+                    alert("購物車是空的喔！");
+                    return;
+                }
+
+                // 2. 檢查登入狀態
+                const user = JSON.parse(localStorage.getItem('currentUser'));
+                if (!user) {
+                    alert("請先登入會員再進行結帳。");
+                    location.href = 'login.html'; // 跳轉到登入頁
+                    return;
+                }
+
+                // 3. 原有的結帳流程
+                const btn = document.querySelector(".checkout-btn");
+                const originalText = btn.innerText;
+
+                // 模擬網路傳輸狀態
+                btn.innerText = "驗證會員資料...";
+                btn.style.opacity = "0.7";
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    // 確認結帳資訊中包含會員名稱
+                    alert(`✅ 訂單已完成！\n感謝您的購買，${user.name}！\n商品將寄送至：${user.address}`);
+
+                    // 歸零並清空
+                    cart = [];
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    renderCart();
+                    
+                    const countEl = document.getElementById("cartCount");
+                    if (countEl) countEl.innerText = "0";
+                    
+                    btn.innerText = originalText;
+                    btn.style.opacity = "1";
+                    btn.disabled = false;
+                    
+                    // 結帳完回首頁
+                    location.href = 'index.html';
+                }, 1500); 
+            }
+
+            function toggleMenu() {
+                const menu = document.getElementById("navMenu");
+                menu.classList.toggle("active");
+            }
+            renderCart();
+
+            document.addEventListener("DOMContentLoaded", function() {
+                    const user = JSON.parse(localStorage.getItem('currentUser'));
+                    const navMenu = document.getElementById("navMenu");
+                    const loginLink = navMenu.querySelector('a[href="login.html"]');
+                    
+                    if (user && loginLink) {
+                        loginLink.innerText = "會員中心";
+                        loginLink.href = "profile.html"; // 指向新的詳細資料頁
+                    }
+                });
+        </script>
+    </body>
 </html>
