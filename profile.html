@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>會員中心｜TechNova</title>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .profile-container { max-width: 600px; margin: 100px auto; padding: 40px; background: #1a1a1a; color: white; border-radius: 20px; border: 1px solid #333; }
+            .info-group { margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+            .info-group label { color: #ff4d4d; font-size: 14px; display: block; }
+            .logout-btn { background: transparent; color: #888; border: 1px solid #444; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-top: 20px; }
+            .logout-btn:hover { color: #ff4d4d; border-color: #ff4d4d; }
+        </style>
+    </head>
+    <body>
+        <header class="navbar">
+            <div class="logo" onclick="location.href='index.html'" style="cursor:pointer">TechNova</div>
+            <nav id="navMenu">
+                <a href="index.html">首頁</a>
+                <a href="products.html">商品</a>
+                <a href="profile.html">會員中心</a>
+            </nav>
+        </header>
+
+        <div class="profile-container">
+            <h2>會員詳細資料</h2><br>
+            <div id="profileDetails">
+                </div>
+            <button class="logout-btn" onclick="logout()">登出帳號</button>
+        </div>
+
+        <script>
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (!user) {
+                location.href = 'login.html';
+            } else {
+                document.getElementById('profileDetails').innerHTML = `
+                    <div class="info-group"><label>名稱</label><p>${user.userId}</p></div>
+                    <div class="info-group"><label>Gmail</label><p>${user.email}</p></div>
+                    <div class="info-group"><label>聯絡電話</label><p>${user.phone}</p></div>
+                    <div class="info-group"><label>收件地址</label><p>${user.address}</p></div>
+                `;
+            }
+
+            function logout() {
+                localStorage.removeItem('currentUser');
+                alert("已登出");
+                location.href = 'index.html';
+            }
+        </script>
+    </body>
+</html>
