@@ -1,131 +1,140 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>TechNova｜智慧 3C 選物店</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>TechNova｜智慧 3C 選物店</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <body>
+        <!-- 導覽列 -->
+        <header class="navbar">
+            <div class="logo">TechNova</div>
 
-<body>
-    <!-- 導覽列 -->
-    <header class="navbar">
-        <div class="logo">TechNova</div>
+            <div class="right-section">
+                <!-- 導覽選單 -->
+                <nav id="navMenu">
+                    <a href="index.html">首頁</a>
+                    <a href="products.html">商品</a>
+                    <a href="download.html">下載</a>
+                    <a href="login.html">登入</a>
+                </nav>
 
-        <div class="right-section">
-            <!-- 導覽選單 -->
-            <nav id="navMenu">
-                <a href="index.html">首頁</a>
-                <a href="products.html">商品</a>
-                <a href="download.html">下載</a>
-                <a href="login.html">登入</a>
-            </nav>
+                <!-- 右側功能區 -->
+                <div class="nav-actions">
+                    <!-- 購物車 -->
+                    <a href="shopping.html" class="cart-icon">
+                        🛒 <span id="cartCount">0</span>
+                    </a>
 
-            <!-- 右側功能區 -->
-            <div class="nav-actions">
-                <!-- 購物車 -->
-                <a href="shopping.html" class="cart-icon">
-                    🛒 <span id="cartCount">0</span>
-                </a>
-
-                <!-- 漢堡按鈕 -->
-                <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-            </div>
-        </div>
-    </header>
-
-    <section>
-        <h1 style="text-align:center; margin:30px 0;">商品列表</h1>
-
-        <!-- 分類按鈕 -->
-        <div class="category-bar">
-            <div class="left-arrow" onclick="scrollCategoryLeft()">&lt;</div>
-            <div class="category-scroll" id="categoryScroll">
-                <div class="category-item" onclick="renderProducts(products)">
-                    <img src="示意圖/TechNova-Logo圖標.jpg" alt="全部">
-                    <p>全部</p>
-                </div>
-                <div class="category-item" onclick="filterByCategory('筆電')">
-                    <img src="示意圖/電競筆電示意圖.webp" alt="筆電">
-                    <p>筆電</p>
-                </div>
-                <div class="category-item" onclick="filterByCategory('顯示器')">
-                    <img src="示意圖/顯示器示意圖.webp" alt="顯示器">
-                    <p>顯示器</p>
-                </div>
-                <div class="category-item" onclick="filterByCategory('鍵盤')">
-                    <img src="示意圖/鍵盤示意圖.webp" alt="鍵盤">
-                    <p>鍵盤</p>
-                </div>
-                <div class="category-item" onclick="filterByCategory('滑鼠')">
-                    <img src="示意圖/滑鼠示意圖.webp" alt="滑鼠">
-                    <p>滑鼠</p>
-                </div>
-                <div class="category-item" onclick="filterByCategory('手機')">
-                    <img src="示意圖/手機示意圖.webp" alt="手機">
-                    <p>手機</p>
-                </div>
-                <div class="category-item" onclick="filterByCategory('耳機')">
-                    <img src="示意圖/耳機示意圖.webp" alt="耳機">
-                    <p>耳機</p>
+                    <!-- 漢堡按鈕 -->
+                    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
                 </div>
             </div>
-            <div class="right-arrow" onclick="scrollCategoryRight()">&gt;</div>
-        </div>
+        </header>
 
-        <!-- 商品區 -->
-        <div class="product-grid" id="productGrid"></div>
-        <script src="products.js"></script>
-    </section>
+        <section>
+            <h1 style="text-align:center; margin:30px 0;">商品列表</h1>
 
-    <!-- 頁尾 -->
-    <footer>
-        © 2025 TechNova 智慧 3C 選物店
-    </footer>
+            <!-- 分類按鈕 -->
+            <div class="category-bar">
+                <div class="left-arrow" onclick="scrollCategoryLeft()">&lt;</div>
+                <div class="category-scroll" id="categoryScroll">
+                    <div class="category-item" onclick="renderProducts(products)">
+                        <img src="示意圖/TechNova-Logo圖標.jpg" alt="全部">
+                        <p>全部</p>
+                    </div>
+                    <div class="category-item" onclick="filterByCategory('筆電')">
+                        <img src="示意圖/電競筆電示意圖.webp" alt="筆電">
+                        <p>筆電</p>
+                    </div>
+                    <div class="category-item" onclick="filterByCategory('顯示器')">
+                        <img src="示意圖/顯示器示意圖.webp" alt="顯示器">
+                        <p>顯示器</p>
+                    </div>
+                    <div class="category-item" onclick="filterByCategory('鍵盤')">
+                        <img src="示意圖/鍵盤示意圖.webp" alt="鍵盤">
+                        <p>鍵盤</p>
+                    </div>
+                    <div class="category-item" onclick="filterByCategory('滑鼠')">
+                        <img src="示意圖/滑鼠示意圖.webp" alt="滑鼠">
+                        <p>滑鼠</p>
+                    </div>
+                    <div class="category-item" onclick="filterByCategory('手機')">
+                        <img src="示意圖/手機示意圖.webp" alt="手機">
+                        <p>手機</p>
+                    </div>
+                    <div class="category-item" onclick="filterByCategory('耳機')">
+                        <img src="示意圖/耳機示意圖.webp" alt="耳機">
+                        <p>耳機</p>
+                    </div>
+                </div>
+                <div class="right-arrow" onclick="scrollCategoryRight()">&gt;</div>
+            </div>
 
-    <script>
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let count = cart.reduce((sum, item) => sum + item.quantity, 0);
-        document.getElementById("cartCount").innerText = count;
+            <!-- 商品區 -->
+            <div class="product-grid" id="productGrid"></div>
+            <script src="products.js"></script>
+        </section>
 
-        function addToCart(event, id) {
-            event.stopPropagation();
+        <!-- 頁尾 -->
+        <footer>
+            © 2025 TechNova 智慧 3C 選物店
+        </footer>
+
+        <script>
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let item = cart.find(i => i.id === id);
-            if (item) {
-                item.quantity++;
-            } else {
-                cart.push({id: id, quantity: 1});
-            }
-            localStorage.setItem('cart', JSON.stringify(cart));
-            count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            let count = cart.reduce((sum, item) => sum + item.quantity, 0);
             document.getElementById("cartCount").innerText = count;
-            alert("已加入購物車！");
-        }
 
-        // 漢堡選單
-        function toggleMenu() {
-            const menu = document.getElementById("navMenu");
-            menu.classList.toggle("active");
-        }
+            function addToCart(event, id) {
+                event.stopPropagation();
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                let item = cart.find(i => i.id === id);
+                if (item) {
+                    item.quantity++;
+                } else {
+                    cart.push({id: id, quantity: 1});
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                count = cart.reduce((sum, item) => sum + item.quantity, 0);
+                document.getElementById("cartCount").innerText = count;
+                alert("已加入購物車！");
+            }
 
-        function goDetail(id) {
-            location.href = `product.html?id=${id}`;
-        }
+            // 漢堡選單
+            function toggleMenu() {
+                const menu = document.getElementById("navMenu");
+                menu.classList.toggle("active");
+            }
 
-        // 分類滑動
-        function scrollCategoryLeft() {
-            const scroll = document.getElementById("categoryScroll");
-            scroll.scrollBy({ left: -200, behavior: 'smooth' });
-        }
+            function goDetail(id) {
+                location.href = `product.html?id=${id}`;
+            }
 
-        function scrollCategoryRight() {
-            const scroll = document.getElementById("categoryScroll");
-            scroll.scrollBy({ left: 200, behavior: 'smooth' });
-        }
+            // 分類滑動
+            function scrollCategoryLeft() {
+                const scroll = document.getElementById("categoryScroll");
+                scroll.scrollBy({ left: -200, behavior: 'smooth' });
+            }
 
-    </script>
-</body>
+            function scrollCategoryRight() {
+                const scroll = document.getElementById("categoryScroll");
+                scroll.scrollBy({ left: 200, behavior: 'smooth' });
+            }
 
+            document.addEventListener("DOMContentLoaded", function() {
+                    const user = JSON.parse(localStorage.getItem('currentUser'));
+                    const navMenu = document.getElementById("navMenu");
+                    
+                    const loginLink = navMenu.querySelector('a[href="login.html"]');
+                    
+                    if (user && loginLink) {
+                        loginLink.innerText = "會員中心";
+                        loginLink.href = "profile.html"; // 指向新的詳細資料頁
+                    }
+                });
+        </script>
+    </body>
 </html>
