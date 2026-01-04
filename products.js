@@ -1,7 +1,7 @@
 const products = [
     {
         id: "nb01",
-        name: "ASUS ROG Strix G15",
+        name: "ROG Flow Z13",
         category: "筆電",
         specs: [
             {
@@ -242,6 +242,14 @@ function goDetail(id) {
     location.href = `product.html?id=${id}`;
 }
 
+// 加入購物車
+// function addToCart(event, id) {
+//     event.stopPropagation(); // 阻止跳轉
+//     // 這裡可以添加購物車邏輯
+//     alert("已加入購物車！");
+// }
+
+// 第二版(Gemini)
 // 加入購物車 (列表頁預設加入第一個規格)
 function addToCart(event, id) {
     event.stopPropagation(); // 阻止跳轉到詳細頁
@@ -278,4 +286,3 @@ function updateCartCount() {
         cartCountEl.innerText = count;
     }
 }
-
